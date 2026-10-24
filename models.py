@@ -14,8 +14,8 @@ class User(Base):
     email: Mapped[str] = mapped_column(sqlalchemy.String, unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(sqlalchemy.String, nullable=False)
     full_name: Mapped[str] = mapped_column(sqlalchemy.String, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now())
+    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now(), onupdate=sqlalchemy.func.now())
 
 class Account(Base):
     __tablename__ = "accounts"
@@ -23,8 +23,8 @@ class Account(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(sqlalchemy.String, nullable=False)
     balance: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False, default=0)
-    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now())
+    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now(), onupdate=sqlalchemy.func.now())
     
 class Category(Base):
     __tablename__ = "categories"
@@ -46,8 +46,8 @@ class Transaction(Base):
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=False)
     amount:Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False, default=0)
     type: Mapped[TransactionType] = mapped_column(SQLEnum(TransactionType), nullable=False)
-    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now())
+    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now(), onupdate=sqlalchemy.func.now())
     
 class Goal(Base):
     __tablename__ = "goals"
@@ -56,8 +56,8 @@ class Goal(Base):
     name: Mapped[str] = mapped_column(sqlalchemy.String, nullable=False)
     target_amount:Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False, default=0)
     deadline: Mapped[date] = mapped_column(sqlalchemy.Date, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now())
+    updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now(), onupdate=sqlalchemy.func.now())
         
     
         
