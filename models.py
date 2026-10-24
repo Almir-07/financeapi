@@ -46,6 +46,7 @@ class Transaction(Base):
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=False)
     amount:Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False, default=0)
     type: Mapped[TransactionType] = mapped_column(SQLEnum(TransactionType), nullable=False)
+    occurred_on: Mapped[date] = mapped_column(sqlalchemy.Date, nullable=False)
     created_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now())
     updated_at: Mapped[datetime] = mapped_column(sqlalchemy.DateTime, nullable=False, server_default=sqlalchemy.func.now(), onupdate=sqlalchemy.func.now())
     
