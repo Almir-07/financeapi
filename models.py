@@ -7,6 +7,8 @@ from datetime import date, datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy import Numeric
 from decimal import Decimal
+import enum
+from sqlalchemy import Enum as SQLEnum
 
 class User(Base):
     __tablename__ = "users"
@@ -32,8 +34,7 @@ class Category(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(sqlalchemy.String, nullable=False)
 
-import enum
-from sqlalchemy import Enum as SQLEnum
+
 
 class TransactionType(str, enum.Enum):
     RECEITA = "RECEITA"
